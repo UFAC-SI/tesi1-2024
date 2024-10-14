@@ -34,31 +34,33 @@ class Crud:
         except Error as er:
             print(er)
     #atualizar
-    def update(self):
-        sql = """UPDATE cliente SET nome='Ciclano', email='ciclano@ufac.br'
-                 WHERE id=21;
-              """
+    def update(self, sql):
+        #sql = """UPDATE cliente SET nome='Ciclano', email='ciclano@ufac.br'
+        #         WHERE id=21;
+        #      """
         try:
             con = self.conexao.get_conexao()
             cursor = con.cursor()
             cursor.execute(sql)
             if cursor.rowcount == 1:
                 con.commit()
-                print('Registro atualizado com sucesso!')
+                #print('Registro atualizado com sucesso!')
             con.close()
+            return cursor.rowcount
         except Error as er:
             print(er)
     #excluir
-    def delete(self):
-        sql = """DELETE FROM cliente WHERE id=22;"""
+    def delete(self, sql):
+        #sql = """DELETE FROM cliente WHERE id=22;"""
         try:
             con = self.conexao.get_conexao()
             cursor = con.cursor()
             cursor.execute(sql)
             if cursor.rowcount == 1:
                 con.commit()
-                print('Registro excluído com sucesso!')
+                #print('Registro excluído com sucesso!')
             con.close()
+            return cursor.rowcount
         except Error as er:
             print(er)
 
