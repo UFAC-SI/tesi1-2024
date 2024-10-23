@@ -1,4 +1,4 @@
-from conexao import Conexao
+from bd.conexao.conexao import Conexao
 from sqlite3 import Error
 class Crud:
     def __init__(self):
