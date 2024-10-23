@@ -2,12 +2,15 @@ from tkinter import messagebox
 
 import ttkbootstrap as ttk
 
-from bd.crud import Crud
+from bd.conexao.crud import Crud
 
 
 class Tela():
     def __init__(self, master):
         self.janela = master
+        self.janela.config(width=650)
+        self.janela.config(height=200)
+        self.centralizar(self.janela)
         colunas = ('id', 'nome', 'cpf', 'email')
         self.tvw = ttk.Treeview(self.janela, columns=colunas, selectmode='browse', height=5, show='headings', style='dark')
         self.tvw.grid(row=0, column=0)
@@ -49,6 +52,17 @@ class Tela():
         self.crud = Crud()
         self.atualizar_treeview()
 
+    def centralizar(self, janela):
+        w = janela.winfo_reqwidth() #Largura da janela
+        h = janela.winfo_reqheight() #Altura da janela
+        ws = janela.winfo_screenwidth() #Largura do monitor
+        hs = janela.winfo_screenheight() #Largura do monitor
+        x = (ws / 2) - (w / 2) #Ponto x que inicia o desenho da janela
+        # (metade do monitor menos metade da janela)
+        y = (hs / 2) - (h / 2) #Ponto y que inicia o desenho da janela
+        # (metade do monitor menos metade da janela)
+        janela.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
     def pesquisar_cliente(self):
         #termo = self.ent_pesquisar.get()
         # if termo == '':
@@ -79,6 +93,7 @@ class Tela():
         tupla_id = dados[0]
         self.top_editar = ttk.Toplevel()
         self.top_editar.grab_set()
+        self.centralizar(self.top_editar)
         lbl_nome = ttk.Label(self.top_editar, text='Nome:')
         lbl_nome.grid(row=0, column=0)
         lbl_cpf = ttk.Label(self.top_editar, text='CPF:')
@@ -145,6 +160,7 @@ class Tela():
 
         self.top_cadastrar = ttk.Toplevel()
         self.top_cadastrar.grab_set()
+        self.centralizar(self.top_cadastrar)
         lbl_nome = ttk.Label(self.top_cadastrar, text='Nome:')
         lbl_nome.grid(row=0, column=0)
         lbl_cpf = ttk.Label(self.top_cadastrar, text='CPF:')
